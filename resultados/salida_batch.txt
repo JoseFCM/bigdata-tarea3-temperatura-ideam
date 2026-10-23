@@ -1,0 +1,213 @@
+
+======================================================================
+1. Esquema y muestra de los datos originales
+======================================================================
+root
+ |-- codigoestacion: string (nullable = true)
+ |-- codigosensor: string (nullable = true)
+ |-- fechaobservacion: string (nullable = true)
+ |-- valorobservado: double (nullable = true)
+ |-- nombreestacion: string (nullable = true)
+ |-- departamento: string (nullable = true)
+ |-- municipio: string (nullable = true)
+ |-- zonahidrografica: string (nullable = true)
+ |-- latitud: double (nullable = true)
+ |-- longitud: double (nullable = true)
+ |-- descripcionsensor: string (nullable = true)
+ |-- unidadmedida: string (nullable = true)
+
++-----------------------+---------------------+---------------+---------+--------------+
+|fechaobservacion       |nombreestacion       |departamento   |municipio|valorobservado|
++-----------------------+---------------------+---------------+---------+--------------+
+|2025-01-01T00:00:00.000|BETULIA LA           |HUILA          |AGRADO   |22.2          |
+|2025-01-01T00:00:00.000|AEROPUERTO SAN LUIS  |NARIÑO         |ALDANA   |10.6          |
+|2025-01-01T00:00:00.000|PUERTO INIRIDA       |GUAINÍA        |INÍRIDA  |26.2          |
+|2025-01-01T00:00:00.000|UNIVERSIDAD DEL VALLE|VALLE DEL CAUCA|CALI     |22.2          |
+|2025-01-01T00:00:00.000|CORINTO              |CAUCA          |CORINTO  |22.2          |
++-----------------------+---------------------+---------------+---------+--------------+
+only showing top 5 rows
+
+Total de registros cargados desde HDFS: 6,962,317
+
+======================================================================
+2. Limpieza y calidad de los datos
+======================================================================
+Registros con valores nulos:                    0
+Registros duplicados (misma estación y fecha):  772,889
+Registros atípicos (fuera del rango físico o del normal de su estación): 5,788
+Registros válidos para el análisis:             6,183,640 (88.8% del total)
+
+======================================================================
+3. Estadísticas generales de la temperatura (°C)
+======================================================================
++-------+------------------+
+|summary|       temperatura|
++-------+------------------+
+|  count|           6183640|
+|   mean|21.661556505271953|
+| stddev| 6.829685315431551|
+|    min|               0.0|
+|    25%|              17.1|
+|    50%|              22.4|
+|    75%|              26.9|
+|    max|              45.0|
++-------+------------------+
+
+Estaciones distintas: 422  |  Departamentos: 32
+
+======================================================================
+4. Temperatura por departamento (ordenado por promedio)
+======================================================================
++------------------------+--------+------+------+----------+---------+
+|departamento            |promedio|minima|maxima|estaciones|registros|
++------------------------+--------+------+------+----------+---------+
+|BOLIVAR                 |28.62   |18.9  |43.5  |9         |274533   |
+|CESAR                   |28.61   |11.3  |41.4  |8         |243353   |
+|SAN ANDRÉS Y PROVIDENCIA|28.43   |19.7  |34.3  |2         |277235   |
+|CORDOBA                 |28.01   |18.8  |45.0  |11        |275809   |
+|ATLANTICO               |27.68   |18.0  |39.2  |6         |257069   |
+|SUCRE                   |27.48   |18.7  |37.4  |5         |26319    |
+|LA GUAJIRA              |27.34   |13.9  |41.0  |14        |295334   |
+|GUAINÍA                 |27.33   |19.4  |37.1  |1         |6982     |
+|MAGDALENA               |27.23   |6.0   |39.3  |11        |60061    |
+|VICHADA                 |27.1    |18.7  |38.8  |4         |14974    |
+|AMAZONAS                |26.29   |19.4  |36.6  |2         |218885   |
+|GUAVIARE                |25.39   |19.7  |34.7  |1         |5416     |
+|CHOCO                   |25.14   |0.0   |45.0  |15        |42910    |
+|CASANARE                |25.11   |0.0   |38.0  |6         |28610    |
+|NORTE DE SANTANDER      |25.05   |0.0   |39.8  |13        |287287   |
+|META                    |24.67   |9.7   |37.4  |11        |72605    |
+|CAQUETA                 |24.65   |17.1  |39.1  |7         |26749    |
+|PUTUMAYO                |23.06   |17.1  |31.9  |2         |10370    |
+|VALLE DEL CAUCA         |22.97   |9.1   |36.4  |12        |266081   |
+|HUILA                   |21.39   |8.6   |40.1  |22        |124907   |
+|RISARALDA               |21.11   |0.0   |31.6  |6         |245449   |
+|SANTANDER               |21.11   |0.0   |38.8  |29        |371328   |
+|TOLIMA                  |20.33   |0.0   |40.1  |23        |143033   |
+|ANTIOQUIA               |19.76   |0.0   |38.1  |43        |667018   |
+|QUINDÍO                 |18.85   |4.0   |32.4  |6         |260166   |
+|CAUCA                   |18.34   |0.0   |37.6  |13        |50338    |
+|CUNDINAMARCA            |17.0    |0.0   |38.7  |52        |561419   |
+|BOGOTÁ                  |14.17   |2.3   |25.4  |10        |282414   |
+|BOYACÁ                  |14.15   |0.0   |36.5  |41        |417537   |
+|NARIÑO                  |12.67   |0.0   |36.2  |19        |299722   |
+|CALDAS                  |12.24   |0.0   |28.9  |15        |58842    |
+|ARAUCA                  |10.65   |0.0   |35.0  |3         |10885    |
++------------------------+--------+------+------+----------+---------+
+
+
+======================================================================
+5. Temperatura promedio por zona hidrográfica (10 más cálidas)
+======================================================================
++--------------------------------+--------+---------+
+|zonahidrografica                |promedio|registros|
++--------------------------------+--------+---------+
+|CESAR                           |28.54   |254003   |
+|CARIBE - LITORAL                |28.51   |256716   |
+|ISLAS CARIBE                    |28.43   |277235   |
+|SINÚ                            |28.04   |251406   |
+|BAJO MAGDALENA                  |27.75   |304286   |
+|BAJO MAGDALENA- CAUCA -SAN JORGE|27.63   |53711    |
+|CARIBE - GUAJIRA                |27.34   |307218   |
+|INÍRIDA                         |27.33   |6982     |
+|TOMO                            |27.17   |11990    |
+|VICHADA                         |26.71   |5350     |
++--------------------------------+--------+---------+
+only showing top 10 rows
+
+
+======================================================================
+6. Comportamiento mensual (2025)
+======================================================================
++---+--------+---------+
+|mes|promedio|registros|
++---+--------+---------+
+|  1|   21.89|   544352|
+|  2|   22.76|   110874|
+|  3|   22.43|   501343|
+|  4|   22.35|   537556|
+|  5|    22.0|   360219|
+|  6|   21.65|   521568|
+|  7|   21.65|   608810|
+|  8|   21.77|   579993|
+|  9|   21.56|   526800|
+| 10|   21.11|   598069|
+| 11|   21.18|   639466|
+| 12|   20.93|   654590|
++---+--------+---------+
+
+
+======================================================================
+7. Ciclo diario: temperatura promedio por hora (hora de Colombia)
+======================================================================
++----+--------+
+|hora|promedio|
++----+--------+
+|   0|   19.55|
+|   1|   19.31|
+|   2|   19.16|
+|   3|   19.06|
+|   4|   18.98|
+|   5|    18.9|
+|   6|   19.08|
+|   7|   20.15|
+|   8|   21.76|
+|   9|   23.18|
+|  10|    24.3|
+|  11|   25.06|
+|  12|   25.48|
+|  13|   25.59|
+|  14|   25.44|
+|  15|   25.06|
+|  16|   24.34|
+|  17|    23.2|
+|  18|   21.71|
+|  19|   20.51|
+|  20|   20.11|
+|  21|   19.83|
+|  22|   20.04|
+|  23|   19.76|
++----+--------+
+
+
+======================================================================
+8. Las 5 estaciones más cálidas y las 5 más frías (promedio anual)
+======================================================================
++---------------------------------------+--------------------+------------------+--------+---------+
+|nombreestacion                         |municipio           |departamento      |promedio|registros|
++---------------------------------------+--------------------+------------------+--------+---------+
+|HOBO                                   |EL CARMÉN DE BOLÍVAR|BOLIVAR           |32.54   |7498     |
+|FEDEARROZ                              |VALLEDUPAR          |CESAR             |30.93   |5091     |
+|IPICHIRRAIN                            |URIBIA              |LA GUAJIRA        |29.93   |7465     |
+|UNIVERSIDAD FRANCISO DE PAULA SANTANDER|CÚCUTA              |NORTE DE SANTANDER|29.47   |6144     |
+|LA GRAN VIA                            |ZONA BANANERA       |MAGDALENA         |29.23   |5484     |
++---------------------------------------+--------------------+------------------+--------+---------+
+only showing top 5 rows
+
++-------------------+----------+------------+--------+---------+
+|nombreestacion     |municipio |departamento|promedio|registros|
++-------------------+----------+------------+--------+---------+
+|NEVADO SANTA ISABEL|VILLAMARIA|CALDAS      |1.61    |1234     |
+|NEVADO DEL TOLIMA  |ANZOÁTEGUI|TOLIMA      |1.86    |4823     |
+|NEVADO DEL COCUY   |GUICÁN    |BOYACÁ      |2.65    |1003     |
+|PARAMO CONEJERAS   |VILLAMARIA|CALDAS      |3.06    |5035     |
+|LAGUNA LA PLAZA    |SARAVENA  |ARAUCA      |3.13    |7300     |
++-------------------+----------+------------+--------+---------+
+only showing top 5 rows
+
+
+======================================================================
+9. Cálculo con RDD (map y reduceByKey): promedio por departamento
+======================================================================
+Particiones del RDD: 16
+  BOLIVAR                       28.62 °C
+  CESAR                         28.61 °C
+  SAN ANDRÉS Y PROVIDENCIA      28.43 °C
+  CORDOBA                       28.01 °C
+  ATLANTICO                     27.68 °C
+(Coincide con el resultado obtenido con DataFrames en la sección 4.)
+
+Resultados guardados en HDFS: hdfs://localhost:9000/Tarea3/resultados/(por_departamento, por_mes, por_hora)
+Gráficas guardadas en: /home/vboxuser/tarea3/graficas
+
+La interfaz web de Spark (http://localhost:4040) seguirá disponible 30 segundos...
