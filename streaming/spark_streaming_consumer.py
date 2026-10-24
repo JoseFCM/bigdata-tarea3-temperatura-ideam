@@ -11,7 +11,11 @@ from pyspark.sql import SparkSession
 from pyspark.sql.functions import avg, col, count, from_json, max as max_, round as round_, window
 from pyspark.sql.types import FloatType, IntegerType, StringType, StructField, StructType, TimestampType
 
-spark = SparkSession.builder.appName("KafkaSparkStreaming_IDEAM").getOrCreate()
+spark = (SparkSession.builder.appName("KafkaSparkStreaming_IDEAM")
+         # Con 4 núcleos, 4 particiones de shuffle evitan que cada micro-lote tarde ~1 minuto
+         # (el valor por defecto, 200, crea 200 tareas y 200 almacenes de estado por lote)
+         .config("spark.sql.shuffle.partitions", "4")
+         .getOrCreate())
 spark.sparkContext.setLogLevel("WARN")
 
 # Esquema de los mensajes JSON enviados por el productor
